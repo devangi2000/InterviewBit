@@ -67,6 +67,7 @@ bool checkCycleDFS(vector<vector<int>> &adj, vector<int> &visited, vector<int> &
             if(checkCycleDFS(adj, visited, path, it))
                 return true;
         }
+        // when both path and real visited arrays are marked, we know there's a cycle
         else if(path[it] and visited[it]) return true;
     }
     path[current] = 0;
