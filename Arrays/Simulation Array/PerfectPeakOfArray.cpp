@@ -27,7 +27,6 @@
 //  A[4] = 6 is the element we are looking for.
 //  All elements on left of A[4] are smaller than it and all elements on right are greater.
 // Explanation 2:
-
 //  No such element exists.
 
 int Solution::perfectPeak(vector<int> &v) {
