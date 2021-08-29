@@ -71,3 +71,27 @@ int Solution::solve(vector<int> &A){
     vector<vector<int>> dp(n, vector<int>(n, -1));
     return func(0, n-1, A, dp);
 }
+
+
+// OR
+
+
+int solve(int i, int j, vector<vector<int>> &dp, vector<int> &A){
+    if(i >= j)
+        return dp[i][j] = 0;
+    if(dp[i][j] != -1)
+        return dp[i][j];
+    int ans = INT_MAX;
+    int sum = 0;
+    for(int x = i; x <= j; x++)
+        sum += A[x];
+        
+    for(int k = i; k < j; k++){
+        int a = solve(i, k, dp, A);
+        int b = solve(k+1, j, dp, A);
+        int temp = sum + a + b;
+        ans = min(temp, ans);
+    }
+    return dp[i][j] = ans;
+    
+}
