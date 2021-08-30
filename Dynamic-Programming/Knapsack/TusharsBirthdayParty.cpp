@@ -50,3 +50,24 @@ int Solution::solve(const vector<int> &c, const vector<int> &wt, const vector<in
     for(int t=0; t < T; t++) ans += dp[n][c[t]];
     return ans;
 }
+
+
+// OR
+
+int Solution::solve(const vector<int> &c, const vector<int> &wt, const vector<int> &val){
+    int n = *max_element(c.begin(), c.end());
+    vector<int> dp(n+1, INT_MAX);
+    dp[0] = 0;
+    for(int i = 1; i <= n; i++){
+        for(int j = 0; j < wt.size(); j++){
+            if(wt[j] <= i){
+                dp[i] = min(dp[i], val[j] + dp[i - wt[j]]);
+            }
+        }
+    }
+    int ans = 0;
+    for(int i = 0; i < c.size(); i++){
+        ans += dp[c[i]];
+    }
+    return ans;
+}
