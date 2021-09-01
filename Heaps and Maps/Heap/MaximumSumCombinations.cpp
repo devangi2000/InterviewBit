@@ -37,3 +37,20 @@
 //  9   (A : 3) + (B : 6)
 //  8   (A : 3) + (B : 5)
 
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+   sort(A.rbegin(), A.rend());
+   sort(B.rbegin(), B.rend());
+   vector<int> ans;
+   priority_queue<pair<int, pair<int, int> > > pq;
+   pq.push({A[0] + B[0], {0, 0}});
+   while(C--){
+       pair<int, pair<int, int> > curr = pq.top();
+       pq.pop();
+       ans.push_back(curr.first);
+       if(curr.second.first+1 < A.size())
+            pq.push({A[curr.second.first+1] + B[curr.second.second], {curr.second.first+1, curr.second.second}});
+       if(curr.second.first == 0 and curr.second.second+1 < B.size())
+            pq.push({A[curr.second.first]+B[curr.second.second+1], {curr.second.first, curr.second.second+1}});
+   }
+   return ans;
+}
