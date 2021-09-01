@@ -29,3 +29,16 @@
 //  At t = 3 kid eats 3 chocolates from bag 0, and the bag gets filled by 1 chocolate. 
 //  so, total number of chocolates eaten are 6 + 5 + 3 = 14
 
+int Solution::nchoc(int A, vector<int> &B) {
+    priority_queue<long long> pq;
+    for(auto a : B)
+        pq.push(a);
+    long long sum = 0;
+    while(A-- and !pq.empty()){
+        long long x = pq.top();
+        pq.pop();
+        sum += x;
+        pq.push(x/2);
+    }
+    return sum%1000000007;
+}
