@@ -1,5 +1,5 @@
-// Given a string A and a dictionary of words B, determine if A can be segmented into a 
-// space-separated sequence of one or more dictionary words.
+// Given a string A and a dictionary of words B, determine if A can be segmented into a space-separated 
+// sequence of one or more dictionary words.
 // Input Format:
 // The first argument is a string, A.
 // The second argument is an array of strings, B.
@@ -24,26 +24,21 @@
 //     0
 // Explanation 2:
 //     Return 0 ( corresponding to false ) because "a" cannot be segmented as "aaa".
-
-
-int Solution::wordBreak(string s, vector<string> &wordDict) {
-    if(wordDict.size() == 0) return 0;
-    unordered_set<string> words;
-    for(auto word: wordDict)
-        words.insert(word);
-    int n = s.size();
-    vector<bool> dp(n+1, 0);
-    dp[0] = 1;
-    for(int i = 1; i <= n; i++){
-        for(int j = i-1; j >= 0; j--){
-            if(dp[j]){
-                string temp = s.substr(j, i-j);
-                if(words.find(temp) != words.end()){
-                    dp[i] = 1;
-                    break;
-                }
+public class Solution {
+    public int wordBreak(String s, String[] wordDict) {
+        if(s.length() == 0) return 0;
+        int n = s.length();
+        boolean[] dp = new boolean[n+1];
+        Set<String> words = new HashSet<String>();
+        for(String word : wordDict)
+            words.add(word);
+        dp[0] = true;
+        for(int i = 1; i <= n; i++){
+            for(int j = i-1; j >= 0; j--){
+                dp[i] = dp[j] && words.contains(s.substring(j, i));
+                if(dp[i]) break;
             }
         }
+        return dp[n] ? 1 : 0;
     }
-    return dp[n];
 }
