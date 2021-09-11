@@ -1,1 +1,1 @@
-# InterviewBit
+# InterviewBit Solutions
